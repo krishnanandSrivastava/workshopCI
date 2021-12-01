@@ -1,3 +1,6 @@
+<?php   var_dump($this->session->userdata("person"));?>
+
+
 <html lang="en">
 
 <head>
@@ -26,11 +29,12 @@
 </head>
 
 <body>
+    <a href="<?php echo site_url("/Person/logout");?>">Logout</a>
     <table border="1" align="center">
         <h3 align="center">Person List</h3>
         <thead>
             <tr>
-                <td colspan="10" style="text-align:center"><a href="<?php echo site_url("/Person/index/ ") ?>">Add More Data</a></td>
+                <td colspan="10" style="text-align:center"><a href="<?php echo site_url("/Person/createPerson/ ") ?>">Add More Data</a></td>
             </tr>
             <tr>
                 <td>Sno.</td>
@@ -77,7 +81,12 @@
                             <td>
                                 <img width="50" src="<?php echo base_url($row->photo); ?>">
                             </td>
-                            <td> <a onclick="return confirm('Are you sure you want to delete')" href="<?php echo site_url("Person/deletePerson/").$row->id; ?>"> Del</a>  |<a href="<?php echo site_url("Person/editPerson/").$row->id; ?>"> Edit</a></td>
+                            <td>
+                                <a onclick="return confirm('Are you sure want to delete?')" href="<?php echo site_url("/Person/deletePerson/") . $row->id; ?>">Del</a>
+                                | 
+                                
+                                <a onclick="return confirm('Are you sure want to edit this record?')" href="<?php echo site_url("/Person/editPerson/") . $row->id; ?>">Edit</a>
+                            </td>
                         </tr>
                     <?php
                     }
@@ -89,13 +98,30 @@
                 <?php
                 }
                 ?>
+
+                <?php
+                if ($this->session->flashdata("successMessage")) {
+                ?>
+                    <tr>
+                        <td colspan="10" style="color:green">
+                            <?php echo $this->session->flashdata("successMessage"); ?>
+                        </td>
+                    </tr>
+                <?php
+                }
+                if ($this->session->flashdata("errorMessage")) {
+                    ?>
+                        <tr>
+                            <td colspan="10" style="color:red">
+                                <?php echo $this->session->flashdata("errorMessage"); ?>
+                            </td>
+                        </tr>
+                    <?php
+                    }
+                ?>
+
             </tbody>
     </table>
-    <?php 
-        if($s){
-            echo "<script language=\"javascript\">alert('Delete Success');</script>";
-        }
-    ?>
 </body>
 
 </html>
