@@ -129,7 +129,7 @@
             <td class="myformControlBackground"><input type="password" name="cpassword" id="cpassword" placeholder="Enter Password Again"></td>
             <td class="myformControlBackground"><?php echo form_error("cpassword", "<div style='color:red;'>", "</div>"); ?></td>
         </tr>
-        <tr>
+        <tr>    
             <td colspan="2" style="text-align: center;">
                 <input class="btn" style="width: 25em;" type="submit" name="save" value="Save">
             </td>
